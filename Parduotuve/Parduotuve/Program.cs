@@ -18,6 +18,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
 
 //Dependecy injection for use cases and repositories
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
+builder.Services.AddTransient<IAddCategoryUseCase, AddCategoryUseCase>();
 
 var app = builder.Build();
 
