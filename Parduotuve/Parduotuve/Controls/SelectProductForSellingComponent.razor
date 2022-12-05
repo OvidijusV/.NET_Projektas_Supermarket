@@ -1,0 +1,64 @@
+﻿@inject IViewCategoriesUseCase ViewCategoriesUseCase
+@inject IViewProductsByCategoryId ViewProductsByCategoryId
+
+<div class="form-group">
+    <label for="category">Category</label>
+    <select id="category" @bind="SelectedCategoryId" class="form-select">
+        <option selected></option>
+        @foreach (var cat in categories)
+        {
+            <option value="@cat.CategoryId">@cat.Name</option>
+        }
+    </select>
+</div>
+@if(productsInCategory != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prod Name</th>
+                <th>Qty Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var prod in productsInCategory)
+            {
+                <tr>
+                    <td>
+                        @prod.Name
+                    </td>
+                    <td>
+                        @prod.Quantity
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+}
+
+@code {
+    private IEnumerable<Product> productsInCategory;
+
+    private int selectedCategoryId;
+    private int SelectedCategoryId {
+        get
+        {
+            return selectedCategoryId;
+        }
+        set
+        {
+            selectedCategoryId = value;
+            productsInCategory = ViewProductsByCategoryId.Execute(value);
+            StateHasChanged();
+        }
+    }
+
+    private IEnumerable<Category> categories;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        categories = ViewCategoriesUseCase.Execute();
+
+    }
+}

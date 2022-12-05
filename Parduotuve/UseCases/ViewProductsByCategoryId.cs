@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreBusiness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ using UseCases.UseCaseInterfaces;
 
 namespace UseCases
 {
-    public class DeleteProductUseCase : IDeleteProductUseCase
+    public class ViewProductsByCategoryId : IViewProductsByCategoryId
     {
         private readonly IProductRepository productRepository;
 
-        public DeleteProductUseCase(IProductRepository productRepository)
+        public ViewProductsByCategoryId(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
         }
-        public void Execute(int productId)
+        public IEnumerable<Product> Execute(int categoryId)
         {
-            productRepository.DeleteProduct(productId);
+            return productRepository.GetProductsByCategoryId(categoryId);
         }
     }
 }
