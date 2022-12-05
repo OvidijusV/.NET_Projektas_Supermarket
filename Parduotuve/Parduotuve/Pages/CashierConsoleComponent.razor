@@ -2,8 +2,9 @@
 <h3>Cashier's' Console</h3>
 <br/>
 <div class="row">
-    <div class="col">
-        <SelectProductForSellingComponent></SelectProductForSellingComponent>
+    <div class="col-4">
+        <SelectProductForSellingComponent OnProductSelected="SelectProduct"></SelectProductForSellingComponent>
+        <SellProductComponent OnProductSold="SellProduct"></SellProductComponent>
     </div>
     <div class="col">
         Place holder
@@ -12,5 +13,13 @@
 
 
 @code {
+    private void SelectProduct(Product product)
+    {
 
+    }
+
+    private void SellProduct(Product product)
+    {
+
+    }
 }
