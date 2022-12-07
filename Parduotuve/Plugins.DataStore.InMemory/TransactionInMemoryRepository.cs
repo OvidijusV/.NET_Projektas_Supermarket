@@ -28,7 +28,7 @@ namespace Plugins.DataStore.InMemory
         public IEnumerable<Transaction> GetByDay(string cashierName, DateTime date)
         {
             if (string.IsNullOrWhiteSpace(cashierName))
-                return transactions.Where(x => x.TimeStamp == date.Date);
+                return transactions.Where(x => x.TimeStamp.Date == date.Date);
             else
                 return transactions.Where(x => string.Equals(x.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) &&
                 x.TimeStamp.Date == date.Date);
@@ -59,6 +59,15 @@ namespace Plugins.DataStore.InMemory
                 CashierName = cashierName
 
             }); ;
+        }
+
+        public IEnumerable<Transaction> Search(string cashierName, DateTime startDate, DateTime endDate)
+        {
+            if (string.IsNullOrWhiteSpace(cashierName))
+                return transactions.Where(x => x.TimeStamp >= startDate.Date && x.TimeStamp <= endDate.Date.AddDays(1).Date);
+            else
+                return transactions.Where(x => string.Equals(x.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) &&
+                x.TimeStamp >= startDate.Date && x.TimeStamp <= endDate.Date.AddDays(1).Date);
         }
     }
 }
