@@ -7,7 +7,6 @@ namespace Plugins.DataStore.SQL
     {
         public MarketContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<Category> Categories { get; set; }

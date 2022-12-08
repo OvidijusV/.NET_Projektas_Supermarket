@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.Transactions
 {
     public class RecordTransactionUseCase : IRecordTransactionUseCase
     {
